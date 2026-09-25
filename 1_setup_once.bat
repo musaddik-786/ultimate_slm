@@ -32,6 +32,7 @@ if exist "%KEY_FILE%" (
     echo [1/2] SSH key already exists at %KEY_FILE% — skipping generation.
 ) else (
     echo [1/2] Generating SSH key...
+    if not exist "%USERPROFILE%\.ssh" mkdir "%USERPROFILE%\.ssh"
     ssh-keygen -t ed25519 -f "%KEY_FILE%" -N "" -C "motor-demo-key"
     if errorlevel 1 (
         echo [ERROR] ssh-keygen failed. Make sure OpenSSH is installed.
